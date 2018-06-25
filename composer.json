@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ymbra\\DrupalRoboTasks\\": "src/DrupalRoboTasks/"
+            "Ymbra\\DrupalRoboTasks\\": "src/"
         }
     }
 }
