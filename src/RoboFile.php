@@ -382,7 +382,9 @@ class RoboFile extends Tasks {
     // Rebuild cache.
     $collection->AddTask($this->taskExec(self::DRUSH)
       ->arg('cache-rebuild'));
-    $collection->AddTask($this->taskExec(self::DRUSH . ' @' . $this->project_name . '.local user-login'));
+    if ($this->devel) {
+      $collection->AddTask($this->taskExec(self::DRUSH . ' @' . $this->project_name . '.local user:login'));
+    }
 
     // Run all the tasks and return the result.
     return $collection->run();
