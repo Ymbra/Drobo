@@ -155,21 +155,18 @@ class RoboFile extends Tasks {
         $this->taskExec(self::NPM)
           ->arg('install')
           ->arg('--no-save')
-          ->dir($theme_path)
       );
       // Be sure the C bindings for libsass are correct.
       $collection->addTask(
         $this->taskExec(self::NPM)
           ->arg('rebuild')
           ->arg('node-sass')
-          ->dir($theme_path)
       );
       $collection->addTask(
         $this->taskExec(self::NPM)
           ->arg('run')
           ->arg('gulp')
           ->arg($opts['devel'] ? 'styles' : 'styles:production')
-          ->dir($theme_path)
       );
 
       return $collection->run();
