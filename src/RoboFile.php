@@ -324,7 +324,21 @@ class RoboFile extends Tasks {
       $this->devel = TRUE;
     }
 
-    $this->_copy(self::ROOT . '/web/sites/default/default.settings.php', self::ROOT . '/web/sites/default/settings.php');
+    // Prepare permissions.
+    $this->_chmod(self::ROOT . '/web/sites/default', 0777);
+
+    // Since we have no settings.php checked in the repository we copy a default
+    // one consisting of the Drupal default plus custom configurations.
+    $this->taskFilesystemStack()
+      ->copy(self::ROOT . '/web/sites/default/default.settings.php', self::ROOT . '/web/sites/default/settings.php', TRUE)
+      ->run();
+    $this->taskWriteToFile(self::ROOT . '/web/sites/default/settings.php')
+      ->append(TRUE)
+      ->line('// Custom configurations.')
+      ->line('include $app_root . \'/\' . $site_path . \'/settings.local.php\';')
+      ->line('$settings[\'install_profile\'] = \'minimal\';')
+      ->line('$config_directories[\'sync\'] = \'../configsync\';')
+      ->run();
 
     // Collection of tasks that run one after the other.
     $collection = $this->collectionBuilder();
