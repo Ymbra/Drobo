@@ -23,14 +23,16 @@ use Robo\Tasks;
  */
 class RoboFile extends Tasks {
 
+  const ROOT = __DIR__ . '/../../../..';
+
   // Use drush in non interactive mode.
-  const DRUSH = __DIR__ . '/vendor/bin/drush --yes --root=' . __DIR__ . '/web';
+  const DRUSH = self::ROOT . '/vendor/bin/drush --yes --root=' . self::ROOT . '/web';
 
   // We use Robo itself to launch parallel tasks.
-  const ROBO = __DIR__ . '/vendor/bin/robo';
+  const ROBO = self::ROOT . '/vendor/bin/robo';
 
   // We use npm to build the theme.
-  const NPM = __DIR__ . '/vendor/bin/npm';
+  const NPM = self::ROOT . '/vendor/bin/npm';
 
   /**
    * Decoded composer.json.
@@ -51,14 +53,14 @@ class RoboFile extends Tasks {
    */
   public function __construct() {
     // Read the json.
-    $composer = json_decode(file_get_contents(__DIR__ . '/composer.json'));
+    $composer = json_decode(file_get_contents(self::ROOT . '/composer.json'));
     // Structure with the extra config we add to composer.
     $this->composer = $composer->extra->drupalconfig;
     // Parse the project name skipping the vendor.
     $this->project_name = explode('/', $composer->name)[1];
 
-    $this->theme = Yaml::parseFile(__DIR__ . '/configsync/system.theme.yml');
-    $this->site = Yaml::parseFile(__DIR__ . '/configsync/system.site.yml');
+    $this->theme = Yaml::parseFile(self::ROOT . '/configsync/system.theme.yml');
+    $this->site = Yaml::parseFile(self::ROOT . '/configsync/system.site.yml');
   }
 
   /**
@@ -69,7 +71,7 @@ class RoboFile extends Tasks {
 
     // Dump external database that is in 'myblobs' dir.
     $this->taskExec('zcat')
-      ->rawArg(__DIR__ . '/myblobs/*.mysql.bck.gz')
+      ->rawArg(self::ROOT . '/myblobs/*.mysql.bck.gz')
       ->rawArg(' | ')
       ->rawArg('mysql -h' . $host . ' -udb -pdb ' . $this->project_name . '_db')
       ->run();
@@ -143,7 +145,7 @@ class RoboFile extends Tasks {
    */
   public function styles($opts = ['devel' => FALSE]) {
     if ($this->theme['default'] != 'bartik') {
-      $theme_path = __DIR__ . '/web/themes/custom/' . $this->theme['default'];
+      $theme_path = self::ROOT . '/web/themes/custom/' . $this->theme['default'];
 
       $collection = $this->collectionBuilder();
 
@@ -184,12 +186,12 @@ class RoboFile extends Tasks {
     $this->devel = TRUE;
 
     // Prepare permissions.
-    $this->_chmod(__DIR__ . '/web/sites/default', 0777);
-    $this->_chmod(__DIR__ . '/web/sites/default/settings.php', 0777);
+    $this->_chmod(self::ROOT . '/web/sites/default', 0777);
+    $this->_chmod(self::ROOT . '/web/sites/default/settings.php', 0777);
 
     // Call the main install function.
     $this->drupalInstall();
-    $this->_chmod(__DIR__ . '/web/sites/default', 0755);
+    $this->_chmod(self::ROOT . '/web/sites/default', 0755);
   }
 
   /**
@@ -233,7 +235,7 @@ class RoboFile extends Tasks {
 
     // Create 'backups' directory.
     $this->taskExec('mkdir')
-      ->arg(__DIR__ . '/backups')
+      ->arg(self::ROOT . '/backups')
       ->run();
 
     // Generate backup.
@@ -248,14 +250,14 @@ class RoboFile extends Tasks {
    */
   public function drupalInstall($opts = ['devel' => FALSE]) {
     // Prepare permissions.
-    $this->_chmod(__DIR__ . '/web/sites/default', 0777);
+    $this->_chmod(self::ROOT . '/web/sites/default', 0777);
 
     // Since we have no settings.php checked in the repository we copy a default
     // one consisting of the Drupal default plus custom configurations.
     $this->taskFilesystemStack()
-      ->copy(__DIR__ . '/web/sites/default/default.settings.php', __DIR__ . '/web/sites/default/settings.php', TRUE)
+      ->copy(self::ROOT . '/web/sites/default/default.settings.php', self::ROOT . '/web/sites/default/settings.php', TRUE)
       ->run();
-    $this->taskWriteToFile(__DIR__ . '/web/sites/default/settings.php')
+    $this->taskWriteToFile(self::ROOT . '/web/sites/default/settings.php')
       ->append(TRUE)
       ->line('// Custom configurations.')
       ->line('include $app_root . \'/\' . $site_path . \'/settings.local.php\';')
@@ -263,7 +265,7 @@ class RoboFile extends Tasks {
       ->line('$config_directories[\'sync\'] = \'../configsync\';')
       ->run();
 
-    $this->_chmod(__DIR__ . '/web/sites/default/settings.php', 0777);
+    $this->_chmod(self::ROOT . '/web/sites/default/settings.php', 0777);
 
     // Set the devel flag if the option is set.
     if ($opts['devel']) {
@@ -325,7 +327,7 @@ class RoboFile extends Tasks {
       $this->devel = TRUE;
     }
 
-    $this->_copy(__DIR__ . '/web/sites/default/default.settings.php', __DIR__ . '/web/sites/default/settings.php');
+    $this->_copy(self::ROOT . '/web/sites/default/default.settings.php', self::ROOT . '/web/sites/default/settings.php');
 
     // Collection of tasks that run one after the other.
     $collection = $this->collectionBuilder();
@@ -408,14 +410,14 @@ class RoboFile extends Tasks {
       ->run();
 
     // Create dir if it doesn't exist.
-    $path = __DIR__ . '/web/' . $path_to_module . '/';
+    $path = self::ROOT . '/web/' . $path_to_module . '/';
     $translations = $path . 'translations/';
     $this->taskExec('mkdir')
       ->arg('-p')
       ->arg($translations)
       ->run();
     $this->taskExec('mv')
-      ->arg(__DIR__ . '/web/general.pot')
+      ->arg(self::ROOT . '/web/general.pot')
       ->arg($translations . $language . '.po')
       ->run();
     // Write to the info file if needed.
