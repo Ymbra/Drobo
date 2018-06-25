@@ -1,0 +1,23 @@
+{
+    "name": "ymbra/drupalrobotasks",
+    "type": "library",
+    "description": "Handy tasks to manage a Drupal 8 site",
+    "keywords": ["drupal", "robo"],
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Rodrigo Aguilera"
+        }
+        {
+            "name": "Nacho Salvador"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ymbra\\DrupalRoboTasks\\": "src/DrupalRoboTasks/"
+        }
+    }
+}
