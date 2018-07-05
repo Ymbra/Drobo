@@ -166,7 +166,7 @@ class RoboFile extends Tasks {
         $this->taskExec(self::NPM)
           ->arg('run')
           ->arg('gulp')
-          ->arg($opts['devel'] ? 'styles' : 'styles:production')
+          ->arg($opts['devel'] ? 'build:styles' : 'build:styles-production')
       );
 
       return $collection->run();
