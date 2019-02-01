@@ -59,9 +59,9 @@ class RoboFile extends Tasks {
     // Parse the project name skipping the vendor.
     $this->project_name = explode('/', $composer->name)[1];
     
-    if (file_exists(__DIR__ . '/configsync/system.theme.yml') && file_exists(__DIR__ . '/configsync/system.site.yml')) {
-      $this->theme = Yaml::parseFile(__DIR__ . '/configsync/system.theme.yml');
-      $this->site = Yaml::parseFile(__DIR__ . '/configsync/system.site.yml');
+    if (file_exists(self::ROOT . '/configsync/system.theme.yml') && file_exists(self::ROOT . '/configsync/system.site.yml')) {
+      $this->theme = Yaml::parseFile(self::ROOT . '/configsync/system.theme.yml');
+      $this->site = Yaml::parseFile(self::ROOT . '/configsync/system.site.yml');
     }
   }
 
