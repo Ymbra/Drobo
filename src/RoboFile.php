@@ -300,6 +300,9 @@ class RoboFile extends Tasks {
       ->arg('cache-rebuild'));
 
     if ($this->devel) {
+      // Import dev configuration to enable migration modules.
+      $collection->AddTask($this->taskExec(self::DRUSH)
+        ->arg('config-split:import'));
       // Add default content.
       $collection->AddTask($this->taskExec(self::DRUSH)
         ->arg('migrate-import')
