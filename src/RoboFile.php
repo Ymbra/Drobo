@@ -261,7 +261,7 @@ class RoboFile extends Tasks {
       ->line('// Custom configurations.')
       ->line('include $app_root . \'/\' . $site_path . \'/settings.local.php\';')
       ->line('$settings[\'install_profile\'] = \'minimal\';')
-      ->line('$config_directories[\'sync\'] = \'../configsync\';')
+      ->line('$settings[\'config_sync_directory\'] = \'../configsync\';')
       ->run();
 
     $this->_chmod(self::ROOT . '/web/sites/default/settings.php', 0777);
@@ -342,7 +342,7 @@ class RoboFile extends Tasks {
       ->line('// Custom configurations.')
       ->line('include $app_root . \'/\' . $site_path . \'/settings.local.php\';')
       ->line('$settings[\'install_profile\'] = \'minimal\';')
-      ->line('$config_directories[\'sync\'] = \'../configsync\';')
+      ->line('$settings[\'config_sync_directory\'] = \'../configsync\';')
       ->run();
 
     // Collection of tasks that run one after the other.
