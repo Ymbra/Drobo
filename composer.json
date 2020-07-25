@@ -1,6 +1,5 @@
 {
     "name": "ymbra/drupalrobotasks",
-    "type": "library",
     "description": "Handy tasks to manage a Drupal 8 site",
     "keywords": ["drupal", "robo"],
     "license": "GPL-3.0-or-later",
@@ -27,7 +26,7 @@
             "Ymbra\\DrupalRoboTasks\\": "src"
         },
         "bin": [
-            "bin/drupalRobo"
+            "drupalRobo"
         ]
     },
     "support": {
