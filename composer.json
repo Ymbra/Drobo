@@ -25,6 +25,12 @@
     "autoload": {
         "psr-4": {
             "Ymbra\\DrupalRoboTasks\\": "src"
-        }
+        },
+        "bin": [
+            "bin/drupalRobo"
+        ]
+    },
+    "support": {
+        "issues": "https://github.com/Ymbra/DrupalRoboTasks/issues"
     }
 }
