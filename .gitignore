@@ -1,3 +1,7 @@
 # Ignore IDE configurations.
 .idea/
 .vscode/
+
+# Ignore common folders and files
+/vendor
+composer.lock

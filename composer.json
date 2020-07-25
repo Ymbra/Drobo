@@ -19,11 +19,12 @@
         }
     ],
     "require": {
-        "php": "^7.0"
+        "php": "^7.3",
+        "consolidation/Robo": "^1"
     },
     "autoload": {
         "psr-4": {
-            "Ymbra\\DrupalRoboTasks\\": "src/"
+            "Ymbra\\DrupalRoboTasks\\": "src"
         }
     }
 }
