@@ -24,7 +24,7 @@ class RoboFile extends Tasks {
   const ROOT = __DIR__ . '/../../../..';
 
   // Use Drush in non interactive mode.
-  const DRUSH = self::ROOT . '/vendor/bin/drush --yes --root=' . __DIR__ . '/web';
+  const DRUSH = self::ROOT . '/vendor/bin/drush --yes --root=' . self::ROOT . '/web';
 
   /**
    * Build a new Drupal installation from existing configuration.
@@ -37,7 +37,7 @@ class RoboFile extends Tasks {
     // Determines whether a new installation should be performed or an
     // installation should be made from an existing configuration.
     $existing_config = '';
-    foreach (scandir(__DIR__ . '/config/sync') as $file) {
+    foreach (scandir(self::ROOT . '/config/sync') as $file) {
       if (!in_array($file, ['.', '..', '.htaccess'])) {
         $existing_config = '--existing-config';
         break;
@@ -77,12 +77,11 @@ class RoboFile extends Tasks {
   }
 
   /**
-   * Synchronize your local Drupal installation
+   * Synchronize your local Drupal installation.
    */
   public function drupalUpdate() {
-    $this->drupalSettings();
     $this->io()->newLine();
-    $this->io()->title('Synchronizing environment');
+    $this->io()->title('Drupal synchronization');
 
     $collection = $this->collectionBuilder();
 
@@ -117,14 +116,14 @@ class RoboFile extends Tasks {
     // Create "backups" directory.
     if (!is_dir('backups')) {
       $this->taskExec('mkdir')
-        ->arg(__DIR__ . '/backups')
+        ->arg(self::ROOT . '/backups')
         ->run();
     }
 
     // Generate backup.
     $this->taskExec(self::DRUSH)
       ->arg('sql-dump')
-      ->arg('--result-file=' . __DIR__ . "/backups/backup_{$date}.sql")
+      ->arg('--result-file=' . self::ROOT . "/backups/backup_{$date}.sql")
       ->run();
   }
 
@@ -133,7 +132,7 @@ class RoboFile extends Tasks {
    */
   public function localeUpdate() {
     // Getting site information.
-    $site = Yaml::parseFile(__DIR__ . '/config/sync/system.site.yml');
+    $site = Yaml::parseFile(self::ROOT . '/config/sync/system.site.yml');
 
     if (!empty($site) && $site['default_langcode'] != 'en') {
       $collection = $this->collectionBuilder();
@@ -150,7 +149,7 @@ class RoboFile extends Tasks {
       );
 
       // Imports custom .po files defined at the /translations folder.
-      $translations = __DIR__ . '/custom_translations/';
+      $translations = self::ROOT . '/custom_translations/';
       foreach (scandir($translations) as $translation_file) {
         if ((bool) preg_match('/\.po$/', $translation_file)) {
           [$language, $extension] = explode('.', $translation_file);
@@ -187,14 +186,14 @@ class RoboFile extends Tasks {
       ->run();
 
     // Create dir if it doesn't exist.
-    $path = __DIR__ . '/web/' . $path_to_module . '/';
+    $path = self::ROOT . '/web/' . $path_to_module . '/';
     $translations = $path . 'translations/';
     $this->taskExec('mkdir')
       ->arg('-p')
       ->arg($translations)
       ->run();
     $this->taskExec('mv')
-      ->arg(__DIR__ . '/web/general.pot')
+      ->arg(self::ROOT . '/web/general.pot')
       ->arg($translations . $language . '.po')
       ->run();
     // Write to the info file if needed.
@@ -211,7 +210,7 @@ class RoboFile extends Tasks {
    */
   protected function drupalSettings() {
     $this->io()->title('Build custom configurations');
-    $base_path = __DIR__ . '/web/sites/default';
+    $base_path = self::ROOT . '/web/sites/default';
     $collection = $this->collectionBuilder();
 
     // Restores default Drupal settings.
@@ -249,7 +248,7 @@ class RoboFile extends Tasks {
     );
 
     // Flush all derived images only if the "image" module is enabled.
-    if (file_exists(__DIR__ . '/config/sync/image.settings.yml')) {
+    if (file_exists(self::ROOT . '/config/sync/image.settings.yml')) {
       $collection->addTask(
         $this->taskExec(self::DRUSH)
           ->arg('image-flush')
