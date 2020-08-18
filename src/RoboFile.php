@@ -209,7 +209,7 @@ class RoboFile extends Tasks {
   /**
    * Prepare the environment for a later Drupal installation.
    */
-  private function drupalSettings() {
+  protected function drupalSettings() {
     $this->io()->title('Build custom configurations');
     $base_path = __DIR__ . '/web/sites/default';
     $collection = $this->collectionBuilder();
@@ -237,7 +237,7 @@ class RoboFile extends Tasks {
   /**
    * Rebuild cache.
    */
-  private function clearCache() {
+  protected function clearCache() {
     $this->io()->newLine();
     $this->io()->title('Clearing cache');
     $collection = $this->collectionBuilder();
