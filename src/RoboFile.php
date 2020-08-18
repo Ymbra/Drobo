@@ -28,7 +28,6 @@ class RoboFile extends Tasks {
 
   /**
    * Build a new Drupal installation from existing configuration.
-   * Use "--devel" when you need to import default content or build styles.
    */
   public function drupalInstall() {
     $this->drupalSettings();
