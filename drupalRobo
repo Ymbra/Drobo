@@ -22,10 +22,10 @@ $classLoader = require $autoloaderPath;
 $appName = "DrupalRobo";
 $appVersion = trim(file_get_contents(__DIR__ . '/VERSION'));
 // @TODO: Make this as a discovery:
-$commandClasses = [ \DrupalRoboTasks\Commands\DrupalRoboTask::class ];
+$commandClasses = [ \Ymbra\DrupalRoboTasks\Commands\Robofile::class ];
 
-$selfUpdateRepository = 'myorg/myproject';
-$configurationFilename = 'drupal_robo_app.yml';
+$selfUpdateRepository = 'ymbra/drupalrobotasks';
+$configurationFilename = 'config.yml';
 
 // Define our Runner, and pass it the command classes we provide.
 $runner = new Runner($commandClasses);

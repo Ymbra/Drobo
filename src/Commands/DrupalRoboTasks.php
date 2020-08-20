@@ -1,6 +1,6 @@
 <?php
 
-namespace Ymbra\DrupalRoboTasks;
+namespace Ymbra\DrupalRoboTasks\Commands;
 
 /**
  * @file
@@ -9,7 +9,7 @@ namespace Ymbra\DrupalRoboTasks;
  * @category Scripts
  * @package Scripts
  * @author Ymbra <hola@ymbra.com>
- * @license GPL-2.0-or-later https://www.gnu.org/licenses/gpl.html
+ * @license GPLv3+ https://www.gnu.org/licenses/gpl.html
  * @link https://robo.li/
  */
 
@@ -19,7 +19,7 @@ use Robo\Tasks;
 /**
  * Project tasks.
  */
-class RoboFile extends Tasks {
+class DrupalRoboTasks extends Tasks {
 
   const ROOT = __DIR__ . '/../../../..';
 

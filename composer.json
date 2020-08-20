@@ -1,7 +1,7 @@
 {
     "name": "ymbra/drupalrobotasks",
     "description": "Handy tasks to manage a Drupal 8 site",
-    "keywords": ["drupal", "robo"],
+    "keywords": ["drupal", "robo", "drupalrobo"],
     "license": "GPL-3.0-or-later",
     "authors": [
         {
@@ -17,17 +17,15 @@
             "name": "Jose Luis Bellido"
         }
     ],
+    "bin":["robo"],
     "require": {
         "php": "^7.0",
-        "consolidation/Robo": "^1"
+        "consolidation/robo": "^1.4"
     },
     "autoload": {
         "psr-4": {
-            "Ymbra\\DrupalRoboTasks\\": "./src/"
-        },
-        "bin": [
-            "drupalRobo"
-        ]
+            "Ymbra\\DrupalRoboTasks\\": "src"
+        }
     },
     "support": {
         "issues": "https://github.com/Ymbra/DrupalRoboTasks/issues"
