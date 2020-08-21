@@ -13,6 +13,8 @@ if ($pharPath) {
     $autoloaderPath = __DIR__ . '/vendor/autoload.php';
   } elseif (file_exists(__DIR__.'/../../autoload.php')) {
     $autoloaderPath = __DIR__ . '/../../autoload.php';
+  } elseif (file_exists(__DIR__.'/../../../autoload.php')) {
+    $autoloaderPath = __DIR__ . '/../../../autoload.php';
   } else {
     die("Could not find autoloader. Run 'composer install'.");
   }
@@ -21,12 +23,12 @@ $classLoader = require $autoloaderPath;
 
 // Customization variables
 $appName = "Drupal Robo";
-$appVersion = trim(file_get_contents(__DIR__ . '/VERSION'));
+$appVersion = trim(file_get_contents(__DIR__ . '/../VERSION'));
 
 // Discover task classes:
 $discovery = new CommandFileDiscovery();
 $discovery->setSearchPattern('*Commands.php');
-$commandClasses = $discovery->discover(__DIR__ . '/src/Commands', '\Ymbra\DrupalRoboTasks\Commands');
+$commandClasses = $discovery->discover(__DIR__ . '/../src/Commands', '\Ymbra\DrupalRoboTasks\Commands');
 
 $selfUpdateRepository = 'ymbra/drupalrobotasks';
 $configurationFilename = 'config.yml';
