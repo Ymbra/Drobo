@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use Consolidation\AnnotatedCommand\CommandFileDiscovery;
 use Robo\Runner;
 
 // If we're running from phar load the phar autoload file.
@@ -19,25 +20,25 @@ if ($pharPath) {
 $classLoader = require $autoloaderPath;
 
 // Customization variables
-$appName = "DrupalRobo";
+$appName = "Drupal Robo";
 $appVersion = trim(file_get_contents(__DIR__ . '/VERSION'));
-// @TODO: Make this as a discovery:
-$commandClasses = [
-  \Ymbra\DrupalRoboTasks\Tasks\DatabaseTasks::class,
-  \Ymbra\DrupalRoboTasks\Tasks\SiteTasks::class
-];
+
+// Discover task classes:
+$discovery = new CommandFileDiscovery();
+$discovery->setSearchPattern('*Tasks.php');
+$taskClasses = $discovery->discover(__DIR__ . '/src/Tasks', '\Ymbra\DrupalRoboTasks\Tasks');
 
 $selfUpdateRepository = 'ymbra/drupalrobotasks';
 $configurationFilename = 'config.yml';
 
-// Define our Runner, and pass it the command classes we provide.
-$runner = new Runner($commandClasses);
+// Define our Runner, and pass it the task classes we provide.
+$runner = new Runner($taskClasses);
 $runner
   ->setSelfUpdateRepository($selfUpdateRepository)
   ->setConfigurationFilename($configurationFilename)
   ->setClassLoader($classLoader);
 
-// Execute the command and return the result.
+// Execute the runner and return the result.
 $output = new \Symfony\Component\Console\Output\ConsoleOutput();
 $statusCode = $runner->execute($argv, $appName, $appVersion, $output);
 exit($statusCode);
