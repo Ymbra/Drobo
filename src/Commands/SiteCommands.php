@@ -1,6 +1,6 @@
 <?php
 
-namespace Ymbra\DrupalRoboTasks\Tasks;
+namespace Ymbra\DrupalRoboTasks\Commands;
 
 /**
  * @file
@@ -19,7 +19,7 @@ use Robo\Tasks;
 /**
  * Site tasks.
  */
-class SiteTasks extends Tasks {
+class SiteCommands extends Tasks {
 
   const ROOT = __DIR__ . '/../../../..';
 

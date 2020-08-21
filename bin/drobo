@@ -25,14 +25,14 @@ $appVersion = trim(file_get_contents(__DIR__ . '/VERSION'));
 
 // Discover task classes:
 $discovery = new CommandFileDiscovery();
-$discovery->setSearchPattern('*Tasks.php');
-$taskClasses = $discovery->discover(__DIR__ . '/src/Tasks', '\Ymbra\DrupalRoboTasks\Tasks');
+$discovery->setSearchPattern('*Commands.php');
+$commandClasses = $discovery->discover(__DIR__ . '/src/Commands', '\Ymbra\DrupalRoboTasks\Commands');
 
 $selfUpdateRepository = 'ymbra/drupalrobotasks';
 $configurationFilename = 'config.yml';
 
-// Define our Runner, and pass it the task classes we provide.
-$runner = new Runner($taskClasses);
+// Define our Runner, and pass it the command classes we provide.
+$runner = new Runner($commandClasses);
 $runner
   ->setSelfUpdateRepository($selfUpdateRepository)
   ->setConfigurationFilename($configurationFilename)

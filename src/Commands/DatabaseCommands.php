@@ -1,6 +1,6 @@
 <?php
 
-namespace Ymbra\DrupalRoboTasks\Tasks;
+namespace Ymbra\DrupalRoboTasks\Commands;
 
 /**
  * @file
@@ -20,6 +20,11 @@ use Robo\Tasks;
  * Database tasks.
  */
 class DatabaseCommands extends Tasks {
+
+  const ROOT = __DIR__ . '/../../../..';
+
+  // Use Drush in non interactive mode.
+  const DRUSH = self::ROOT . '/vendor/bin/drush --yes --root=' . self::ROOT . '/web';
 
   /**
    * Backup database.
