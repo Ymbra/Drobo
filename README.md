@@ -18,11 +18,21 @@ Via Composer
 $ composer require ymbra/drupalrobotasks
 ```
 
-## Example
+## Available tasks
 
-#### Install drupal site.
+#### Install Drupal site.
 ``` bash
-$ vendor/bin/robo drupal:site
+$ vendor/bin/drobo site:install
+```
+
+#### Update Drupal site.
+``` bash
+$ vendor/bin/drobo site:update
+```
+
+#### Backup Drupal database.
+``` bash
+$ vendor/bin/drobo db:backup
 ```
 
 ## License
