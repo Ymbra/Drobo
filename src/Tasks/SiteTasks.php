@@ -1,6 +1,6 @@
 <?php
 
-namespace Ymbra\DrupalRoboTasks\Commands;
+namespace Ymbra\DrupalRoboTasks\Tasks;
 
 /**
  * @file
@@ -17,9 +17,9 @@ use Symfony\Component\Yaml\Yaml;
 use Robo\Tasks;
 
 /**
- * Project tasks.
+ * Site tasks.
  */
-class DrupalRoboTasks extends Tasks {
+class SiteTasks extends Tasks {
 
   const ROOT = __DIR__ . '/../../../..';
 
@@ -29,8 +29,8 @@ class DrupalRoboTasks extends Tasks {
   /**
    * Build a new Drupal installation from existing configuration.
    */
-  public function drupalInstall() {
-    $this->drupalSettings();
+  public function siteInstall() {
+    $this->siteSettings();
     $this->io()->newLine();
     $this->io()->title('Drupal installation');
 
@@ -79,7 +79,7 @@ class DrupalRoboTasks extends Tasks {
   /**
    * Synchronize your local Drupal installation.
    */
-  public function drupalUpdate() {
+  public function siteUpdate() {
     $this->io()->newLine();
     $this->io()->title('Drupal synchronization');
 
@@ -105,26 +105,6 @@ class DrupalRoboTasks extends Tasks {
 
     // Rebuild cache.
     $this->clearCache();
-  }
-
-  /**
-   * Backup database.
-   */
-  public function drupalBackup() {
-    $date = date('YmdHi');
-
-    // Create "backups" directory.
-    if (!is_dir('backups')) {
-      $this->taskExec('mkdir')
-        ->arg(self::ROOT . '/backups')
-        ->run();
-    }
-
-    // Generate backup.
-    $this->taskExec(self::DRUSH)
-      ->arg('sql-dump')
-      ->arg('--result-file=' . self::ROOT . "/backups/backup_{$date}.sql")
-      ->run();
   }
 
   /**
@@ -208,7 +188,7 @@ class DrupalRoboTasks extends Tasks {
   /**
    * Prepare the environment for a later Drupal installation.
    */
-  protected function drupalSettings() {
+  protected function siteSettings() {
     $this->io()->title('Build custom configurations');
     $base_path = self::ROOT . '/web/sites/default';
     $collection = $this->collectionBuilder();
