@@ -22,7 +22,7 @@ $classLoader = require $autoloaderPath;
 $appName = "DrupalRobo";
 $appVersion = trim(file_get_contents(__DIR__ . '/VERSION'));
 // @TODO: Make this as a discovery:
-$commandClasses = [ \Ymbra\DrupalRoboTasks\Commands\Robofile::class ];
+$commandClasses = [ \Ymbra\DrupalRoboTasks\Commands\DrupalRoboTasks::class ];
 
 $selfUpdateRepository = 'ymbra/drupalrobotasks';
 $configurationFilename = 'config.yml';
