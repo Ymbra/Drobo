@@ -29,6 +29,15 @@ $appVersion = trim(file_get_contents(__DIR__ . '/../VERSION'));
 $discovery = new CommandFileDiscovery();
 $discovery->setSearchPattern('*Commands.php');
 $commandClasses = $discovery->discover(__DIR__ . '/../src/Commands', '\Ymbra\DrupalRoboTasks\Commands');
+$customCommandClasses = $discovery->discover(__DIR__ . '/../../../../drobo/Commands', '\Ymbra\DrupalRoboTasks\Commands');
+$commandClasses = array_merge($customCommandClasses, $commandClasses);
+
+// Ensure that any discovered class that is not part of the autoloader is, in fact, included.
+foreach ($commandClasses as $file => $commandClass) {
+  if (!class_exists($commandClass)) {
+    include $file;
+  }
+}
 
 $selfUpdateRepository = 'ymbra/drupalrobotasks';
 $configurationFilename = 'config.yml';

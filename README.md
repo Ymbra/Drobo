@@ -35,6 +35,27 @@ $ vendor/bin/drobo site:update
 $ vendor/bin/drobo db:backup
 ```
 
+## Create Custom tasks
+
+1. Create directory structure /drobo/Commands in your project root.
+2. Create CustomCommands.php inside /drobo/Commands:
+
+```php
+namespace Ymbra\DrupalRoboTasks\Commands;
+
+use Robo\Tasks;
+
+/**
+ * Custom tasks for the project.
+ */
+class CustomCommands extends Tasks {
+  public function helloWorld() {
+    $this->io()->newLine();
+      $this->io()->title('Hello World.');
+  }
+}
+```
+
 ## License
 
 Please see [License File](LICENSE) for more information.

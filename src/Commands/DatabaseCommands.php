@@ -21,7 +21,7 @@ use Robo\Tasks;
  */
 class DatabaseCommands extends Tasks {
 
-  const ROOT = __DIR__ . '/../../../..';
+  const ROOT = __DIR__ . '/../../../../..';
 
   // Use Drush in non interactive mode.
   const DRUSH = self::ROOT . '/vendor/bin/drush --yes --root=' . self::ROOT . '/web';
