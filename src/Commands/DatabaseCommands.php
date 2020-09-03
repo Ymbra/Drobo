@@ -1,6 +1,6 @@
 <?php
 
-namespace Ymbra\DrupalRoboTasks\Commands;
+namespace Drobo\Commands;
 
 /**
  * @file

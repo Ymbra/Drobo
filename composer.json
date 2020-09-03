@@ -1,7 +1,7 @@
 {
-    "name": "ymbra/drupalrobotasks",
+    "name": "ymbra/drobo",
     "description": "Handy tasks to manage a Drupal 8 site",
-    "keywords": ["drupal", "robo", "drupalrobo"],
+    "keywords": ["drupal", "robo", "drobo", "drupalrobo"],
     "license": "GPL-3.0-or-later",
     "authors": [
         {
@@ -24,10 +24,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Ymbra\\DrupalRoboTasks\\": "src"
+            "Drobo\\": "src"
         }
     },
     "support": {
-        "issues": "https://github.com/Ymbra/DrupalRoboTasks/issues"
+        "issues": "https://github.com/Ymbra/Drobo/issues"
     }
 }

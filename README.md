@@ -1,4 +1,4 @@
-# Drupal Robo Tasks
+# Drobo
 
 PHP library based in [Robo](https://robo.li/) that provides handy tasks to manage a Drupal 8 site.
 
@@ -15,7 +15,7 @@ PHP library based in [Robo](https://robo.li/) that provides handy tasks to manag
 Via Composer
 
 ``` bash
-$ composer require ymbra/drupalrobotasks
+$ composer require ymbra/drobo
 ```
 
 ## Available tasks
@@ -41,7 +41,7 @@ $ vendor/bin/drobo db:backup
 2. Create CustomCommands.php inside /drobo/Commands:
 
 ```php
-namespace Ymbra\DrupalRoboTasks\Commands;
+namespace Drobo\Commands;
 
 use Robo\Tasks;
 

@@ -22,14 +22,14 @@ if ($pharPath) {
 $classLoader = require $autoloaderPath;
 
 // Customization variables
-$appName = "Drupal Robo";
+$appName = "Drobo";
 $appVersion = trim(file_get_contents(__DIR__ . '/../VERSION'));
 
 // Discover task classes:
 $discovery = new CommandFileDiscovery();
 $discovery->setSearchPattern('*Commands.php');
-$commandClasses = $discovery->discover(__DIR__ . '/../src/Commands', '\Ymbra\DrupalRoboTasks\Commands');
-$customCommandClasses = $discovery->discover(__DIR__ . '/../../../../drobo/Commands', '\Ymbra\DrupalRoboTasks\Commands');
+$commandClasses = $discovery->discover(__DIR__ . '/../src/Commands', '\Drobo\Commands');
+$customCommandClasses = $discovery->discover(__DIR__ . '/../../../../drobo/Commands', '\Drobo\Commands');
 $commandClasses = array_merge($customCommandClasses, $commandClasses);
 
 // Ensure that any discovered class that is not part of the autoloader is, in fact, included.
@@ -39,7 +39,7 @@ foreach ($commandClasses as $file => $commandClass) {
   }
 }
 
-$selfUpdateRepository = 'ymbra/drupalrobotasks';
+$selfUpdateRepository = 'ymbra/drobo';
 $configurationFilename = 'config.yml';
 
 // Define our Runner, and pass it the command classes we provide.
