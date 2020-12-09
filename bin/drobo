@@ -30,7 +30,7 @@ $discovery = new CommandFileDiscovery();
 $discovery->setSearchPattern('*Commands.php');
 $commandClasses = $discovery->discover(__DIR__ . '/../src/Commands', '\Drobo\Commands');
 $customCommandClasses = $discovery->discover(__DIR__ . '/../../../../drobo/Commands', '\Drobo\Commands');
-$commandClasses = array_merge($customCommandClasses, $commandClasses);
+$commandClasses = array_merge($commandClasses, $customCommandClasses);
 
 // Ensure that any discovered class that is not part of the autoloader is, in fact, included.
 foreach ($commandClasses as $file => $commandClass) {
