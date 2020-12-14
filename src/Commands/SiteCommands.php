@@ -206,7 +206,6 @@ class SiteCommands extends Tasks {
         ->line('')
         ->line('// Custom configurations.')
         ->line('include $app_root . \'/\' . $site_path . \'/settings.local.php\';')
-        ->line('$settings[\'install_profile\'] = \'kickstart\';')
         ->line('$settings[\'config_sync_directory\'] = \'../config/sync\';')
     );
 
