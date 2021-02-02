@@ -20,8 +20,7 @@
     "bin":["bin/drobo"],
     "require": {
         "php": "^7.0",
-        "consolidation/robo": "^1.4",
-        "vlucas/phpdotenv": "^4.1"
+        "consolidation/robo": "^1.4"
     },
     "autoload": {
         "psr-4": {
